@@ -1,0 +1,577 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <title>Resistor colour code calculator</title>
+    <style>
+      body {
+        margin: 0px;
+        padding: 0px;
+		font-family: Arial, Helvetica, sans-serif;
+      }
+	  a {
+	    text-decoration: none;
+	  }
+      #container {
+        width: 578px;
+        margin: 0 auto;
+      }
+      canvas {
+        border: 1px solid #9C9898;
+      }
+      .colorPicker {
+        margin: 0;
+        padding: 0;
+        position: absolute;
+        display: none;
+        text-align: center;
+        border: 3px solid #000;
+      }
+      .colorBox {
+        width: 40px;
+        padding: 12px;
+        font-family: Arial, Helvetica, sans-serif;
+        font-weight: bold;
+      }
+      #valContainer {
+        width: 578px;
+        margin: 0 auto;
+        text-align: center;
+      }
+      #valContainer input, select {
+        padding: 5px;
+        font-size: 20px;
+        border: 1px #abadb3 solid;
+      }
+      #valContainer input {
+        padding: 6px;
+      }
+      #resValue {
+        width: 220px;
+      }
+      #inputError {
+        display: none;
+        width: 220px;
+        margin: 0 278px 0 auto;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 11px;
+        color: #800;
+      }
+      #tolerance {
+        width: 100px;
+      }
+      .invalid {
+        background: #FEE;
+        box-shadow: 0 0 5px #d45252;
+        border: 1px #b03535 solid;
+      }
+      h1 {
+        font-family: "Trebuchet MS", Helvetica, sans-serif;
+        font-style: normal;
+        color: #222;
+        font-weight: 100;
+        letter-spacing: -1px;
+        font-size: 2.0em;
+        position: relative;
+        line-height: 1.2em;
+        padding-top: 0.2em;
+        padding-bottom: 0.125em;
+        margin: 0;
+        text-align: center;
+      }
+      #instructions {
+        font-size:12px;
+        text-align:center;
+        margin: 0;
+      }
+	  #footer {
+	    text-align: center;
+		font-size: 11px;
+		margin: 60px 0 30px 0;
+      }
+    </style>
+    <script src="kinetic-v4.4.3.min.js"></script>
+    <script src="jquery-1.8.3.min.js"></script>
+  </head>
+  <body>
+    <h1>Resistor colour code calculator</h1>
+	<p id="instructions">Click on the colour bands or enter values in the textbox below.</p>
+    <div id="container"></div>
+    <script>
+      
+      // User-defined variables
+      var k = 2.2;             //size multiplier constant
+      var resMidWidth = 56*k;  //width of middle part
+      var resMidLength = 72*k; //length of middle part
+      var resBallRad = 36*k;   //radius of end balls : should be > about resMidWidth/1.74
+      var bandWidth = 15*k;    //width of the colour bands
+      var bandSpacing = 28*k;  //space between the colour bands, max: 40*k for bandWidth=15*k
+      var colors =
+       [['silver', '#cccecc', '#666'],
+        ['gold',   '#FFD700', '#806c00'],
+        ['black',  '#000',    '#333'],
+        ['brown',  '#520',    '#754829'],
+        ['red',    '#fe0000', '#950707'],
+        ['orange', '#F60',    '#963c00'],
+        ['yellow', '#FF0',    '#8e8e00'],
+        ['green',  '#0F0',    '#008a00'],
+        ['blue',   '#00F',    '#000044'],
+        ['violet', '#a901ae', '#4b004d'],
+        ['gray',   '#a4a2a4', '#CCC'],
+        ['white',  '#FFF',    '#555']];
+      var tolColors =
+       [['20',     '#ada789', colors[2][2] ],
+        ['10',     '#cccecc', colors[0][2] ],
+        ['5',      '#FFD700', colors[1][2] ],
+        ['2',      '#fe0000', colors[4][2] ],
+        ['1',      '#520',    colors[3][2] ],
+        ['0.5',    '#0F0',    colors[7][2] ],
+        ['0.25',   '#00F',    colors[8][2] ],
+        ['0.1',    '#a901ae', colors[9][2] ],
+        ['0.05',   '#a4a2a4', colors[10][2] ]];
+      
+      // Create a new canvas in #container
+      var stage = new Kinetic.Stage({
+        container: 'container',
+        width: 578,
+        height: 200
+      });
+      
+      // Calculated resistor vars
+      var resX = stage.getWidth()/2+resMidLength/2; //x-pos of resistor _./
+      var resY = stage.getHeight()/2-resMidWidth/2; //y-pos of resistor _./
+      var s = resMidWidth/2; //get center y value of resistor
+      var t = Math.sqrt(Math.pow(resBallRad,2)-Math.pow(s,2)); //get base of triangle
+      var resBallCenX = resX+t; //get x center of right ball
+      var resBallCenY = resY+s; //y-center of right ball 
+      var resBallStartAngle = -1*Math.PI + Math.asin(s/resBallRad); //start angle of right ball, CW rotation
+      var resBallCenXLeft = resBallCenX-resMidLength-2*t;
+      
+      // Create the shape for the resistor
+      var resistor = new Kinetic.Shape({
+        drawFunc: function(canvas) {
+          var context = canvas.getContext();
+          context.beginPath();
+		  
+		  // Start with right ball
+          context.arc(
+            resBallCenX,
+            resBallCenY,
+            resBallRad,
+            resBallStartAngle,
+            -1*resBallStartAngle,
+            0); 
+			
+          // Line to left ball
+          context.lineTo(resX-resMidLength, resY+resMidWidth);
+          
+          // Draw the left ball
+          context.arc(
+            resBallCenXLeft,
+            resBallCenY,
+            resBallRad,
+            resBallStartAngle-Math.PI,
+            -1*(resBallStartAngle+Math.PI),
+            0);
+          
+          // Draws line to right ball, closes path
+          context.closePath();
+          canvas.fillStroke(this);
+        },
+        fill: '#E0D8B1',
+        stroke: 'black',
+        strokeWidth: 2.5
+      }); 
+      
+      // Left most colour band
+      var band1 = new Kinetic.Shape({
+        id: 'band1',
+        drawFunc: function(canvas) {
+          var context = canvas.getContext();
+          context.beginPath();
+          context.arc(
+            resBallCenXLeft,
+            resBallCenY,
+            resBallRad,
+            -Math.PI/2,
+            -1*Math.acos(bandWidth/resBallRad),
+            0);
+
+          context.lineTo(resBallCenXLeft+bandWidth, resBallCenY+Math.sqrt(Math.pow(resBallRad,2)-Math.pow(bandWidth,2)));
+          
+          context.arc(
+            resBallCenXLeft,
+            resBallCenY,
+            resBallRad,
+            Math.acos(bandWidth/resBallRad),
+            Math.PI/2,
+            0);
+          
+          context.closePath();
+          canvas.fillStroke(this);
+        },
+        name: 3,
+        fill: colors[3][1],
+        stroke: 'black',
+        strokeWidth: 2.5
+      }); 
+      
+      activeBand = band1;
+      skipNextDocClick = false;
+      
+      band1.on('click', function() {
+        activeBand = band1;
+        skipNextDocClick = true;
+        $('.colorPicker').hide();
+        $('#band1Picker').show()
+          .css('top', 10);
+        updateColorPickerPos(band1.getId());
+      });
+      
+      // 2nd colour band to the left
+      var band2 = new Kinetic.Rect({
+        id: 'band2',
+        x: resBallCenXLeft + bandSpacing,
+        y: resY,
+        width: bandWidth,
+        height: resMidWidth,
+        name: 2,
+        fill: colors[2][1],
+        stroke: 'black',
+        strokeWidth: 2.5
+      });
+      
+      band2.on('click', function() {
+        activeBand = band2;
+        skipNextDocClick = true;
+        $('.colorPicker').hide();
+        $('#band2Picker').show()
+          .css('top', 10);
+        updateColorPickerPos(band2.getId());
+      });
+      
+      // 3rd colour band to the left
+      var band3 = new Kinetic.Rect({
+        id: 'band3',
+        x: resBallCenXLeft + bandSpacing*2,
+        y: resY,
+        width: bandWidth,
+        height: resMidWidth,
+        name: 4,
+        fill: colors[4][1],
+        stroke: 'black',
+        strokeWidth: 2.5
+      });
+      
+      band3.on('click', function() {
+        activeBand = band3;
+        skipNextDocClick = true;
+        $('.colorPicker').hide();
+        $('#band3Picker').show()
+          .css('top', 10);
+        updateColorPickerPos(band3.getId());
+      });
+      
+      // Tolerance band (right most band)
+      var tolBand = new Kinetic.Shape({
+        id: 'tolBand',
+        drawFunc: function(canvas) {
+          var context = canvas.getContext();
+          context.beginPath();
+          context.arc(
+            resBallCenX,
+            resBallCenY,
+            resBallRad,
+            -Math.PI/2,
+            -Math.PI/2-1*Math.asin(bandWidth/resBallRad),
+            1);
+
+          context.lineTo(resBallCenX-bandWidth, resBallCenY+Math.sqrt(Math.pow(resBallRad,2)-Math.pow(bandWidth,2)));
+          
+          context.arc(
+            resBallCenX,
+            resBallCenY,
+            resBallRad,
+            Math.PI/2+Math.asin(bandWidth/resBallRad),
+            Math.PI/2,
+            1);
+          
+          context.closePath();
+          canvas.fillStroke(this);
+        },
+        name: 2,
+        fill: tolColors[2][1],
+        stroke: 'black',
+        strokeWidth: 2.5
+      }); 
+      
+      tolBand.on('click', function() {
+        activeBand = tolBand;
+        skipNextDocClick = true;
+        $('.colorPicker').hide();
+        $('#tolBandPicker').show()
+          .css('top', 10);
+        updateColorPickerPos(tolBand.getId());
+      });
+      
+      // Create leads at left and right of resistor
+      var leads = new Kinetic.Line({
+        points: [10, stage.getHeight()/2, stage.getWidth()-10, stage.getHeight()/2],
+        //fillLinearGradientStartPoint: [10, 10],
+        //fillLinearGradientEndPoint: [200, 200],
+        //fillLinearGradientColorStops: [0, 'red', 1, 'yellow'],
+        fill: 'red',
+        stroke: 'black',
+        strokeWidth: 6,
+        lineCap: 'round',
+        lineJoin: 'round'
+      });
+      
+      // Create a new layer
+      var layer = new Kinetic.Layer();
+
+      // Add the resistor, leads and bands to the layer
+      layer.add(leads);
+      layer.add(resistor);
+      layer.add(band1);
+      layer.add(band2);
+      layer.add(band3);
+      layer.add(tolBand);
+
+      // Add the layer to the stage
+      stage.add(layer);
+      
+      $(document).ready(function(){
+        
+        // Color picker for band 1
+        $("body").append('<div id="band1Picker" class="colorPicker"></div>')
+        for (i=2; i<colors.length; i++) {
+          $('#band1Picker').append('<div class="colorBox" id="' + i
+            +'" style="background-color: '+colors[i][1]+'; color: '+colors[i][2]+'">'+(i-2)+'</div>');
+        }
+        
+        // Color picker for band 2
+        $("body").append('<div id="band2Picker" class="colorPicker"></div>')
+        for (i=2; i<colors.length; i++) {
+          $('#band2Picker').append('<div class="colorBox" id="' + i
+            +'" style="background-color: '+colors[i][1]+'; color: '+colors[i][2]+'">'+(i-2)+'</div>');
+        }
+        
+        // Color picker for band 3
+        $("body").append('<div id="band3Picker" class="colorPicker"></div>')
+        for (i=0; i<12; i++) {
+          $('#band3Picker').append('<div class="colorBox" id="' + i
+            +'" style="background-color: '+colors[i][1]+'; color: '+colors[i][2]+'">x10<sup>'+(i-2)+'</sup></div>');
+        }
+        
+        // Color picker for tol band
+        $("body").append('<div id="tolBandPicker" class="colorPicker"></div>')
+        for (i=0; i<tolColors.length; i++) {
+          $('#tolBandPicker').append('<div class="colorBox" id="' + i
+            +'" style="background-color: '+tolColors[i][1]+'; color: '+tolColors[i][2]+'">&plusmn;'+tolColors[i][0]+'%</div>');
+        }
+        
+        $(".colorBox").click(function(e) {
+          changeColor(parseInt($(this).attr("id")));
+          $('.colorPicker').hide();
+          
+          e.stopPropagation(); 
+        });
+        
+        $("#unit").change(function() {
+          updateValue();
+        });
+
+        $("#resValue").change(function() { 
+           //updateBands($("#resValue").val());
+           //alert('test');
+           validateInput();
+        });
+        
+        $(document).click(function() {
+          if (skipNextDocClick) {
+            skipNextDocClick = false;
+          }
+          else {
+            $('.colorPicker').hide();
+          }
+        });
+        
+        updateValue();
+      });
+      
+      function updateColorPickerPos(band) {
+        switch(band)
+        {
+          case 'band1':
+            $('#band1Picker').css('left', $('canvas').offset().left+resBallCenXLeft-$('.colorBox').width()/2);
+            break;
+          case 'band2':
+            $('#band2Picker').css('left', $('canvas').offset().left+resBallCenXLeft-$('.colorBox').width()/2+bandSpacing);
+            break;
+          case 'band3':
+            $('#band3Picker').css('left', $('canvas').offset().left+resBallCenXLeft-$('.colorBox').width()/2+bandSpacing*2);
+            break;
+          case 'tolBand':
+            $('#tolBandPicker').css('left', $('canvas').offset().left+resBallCenX-bandWidth-$('.colorBox').width()/2);
+            break;
+        }
+      }
+      
+      $(window).resize(function() {
+        updateColorPickerPos(activeBand.getId());
+      });
+      
+      function changeColor(color) {
+        if (activeBand == tolBand)
+          var colorHex = tolColors[color][1];
+        else
+          var colorHex = colors[color][1];
+        activeBand.setFill(colorHex);
+        activeBand.setName(color);
+        layer.draw();
+        updateValue();
+      }
+      
+      function updateValue() {
+        
+        // Get units multiplier
+        unitExp = parseInt($('#unit').val());
+         
+        // Get and set resistor value
+        tensFactor = band3.getName()-2;
+        
+        resValStr = "" + (band1.getName()-2) + (band2.getName()-2);
+        resValInt = parseInt(resValStr);
+        resValInt = resValInt * Math.pow(10, tensFactor);
+        resValInt = resValInt / Math.pow(10, unitExp);
+
+        $('#resValue').val(resValInt);
+        
+        // Get and set tolerance value
+        tolID = tolBand.getName();
+        tolVal = 5; //default 5%
+        switch(tolID)
+        {
+          case 0:
+            tolVal = 20;
+            break;
+          case 1:
+            tolVal = 10;
+            break;
+          case 2:
+            tolVal = 5;
+            break;
+          case 3:
+            tolVal = 2;
+            break;
+          case 4:
+            tolVal = 1;
+            break;
+          case 5:
+            tolVal = 0.5;
+            break;
+          case 6:
+            tolVal = 0.25;
+            break;
+          case 7:
+            tolVal = 0.1;
+            break;
+          case 8:
+            tolVal = 0.05;
+            break;
+        }
+        tolStr = '±'+tolVal+'%';
+        $('#tolerance').val(tolStr);
+      }
+      
+      // Updates the first 3 bands to the given res val in ohms
+      function updateBands(val) {
+        if (parseInt(val) < 10) {
+          activeBand = band1;
+          changeColor(2);
+          activeBand = band2;
+          changeColor(parseInt(val.charAt(0))+2);
+          activeBand = band3;
+          changeColor(0);
+        }
+        else {
+          activeBand = band1;
+          changeColor(parseInt(val.charAt(0))+2);
+          activeBand = band2;
+          changeColor(parseInt(val.charAt(1))+2);
+          activeBand = band3;
+          changeColor(val.substring(2).length);
+        }
+      }
+      
+      function validateInput() {
+        if (isNaN($('#resValue').val())) {
+          $('#resValue').addClass('invalid');
+          $('#inputError').html("Not a number");
+          $('#inputError').show();
+        }
+        else {
+          if ($('#resValue').val() < 0.01 && $('#resValue').val() != 0) {
+            $('#resValue').addClass('invalid');
+            $('#inputError').html("Smallest value is 0.01 Ohms");
+            $('#inputError').show();
+          }
+          else {
+            if ($('#resValue').val() > 99000000000) {
+              $('#resValue').addClass('invalid');
+              $('#inputError').html("Largest value is 99000 MOhms");
+              $('#inputError').show();
+            }
+            else {
+              resStr = $('#resValue').val().replace('.', '').replace(/^0+/, '');
+              resInts = resStr.replace(/0*$/, '').length;
+              if (resInts == 0 || resInts == 1 || resInts == 2) {
+                //alert(resStr.match(/0*$/))
+                // 
+                // get units multiplier
+                unitExp = parseInt($('#unit').val());
+
+                resValInt = parseFloat($('#resValue').val());
+
+                resValInt = resValInt * Math.pow(10, unitExp);
+                if (resInts == 2 && resValInt < 0.1) {
+                  $('#resValue').addClass('invalid');
+                  $('#inputError').html("Can't have 2 non-zero digits for a value less than 0.1 Ohms");
+                  $('#inputError').show();
+                }
+                else {
+                  updateBands((resValInt*100)+"");
+
+                  $('#resValue').removeClass('invalid');
+                  $('#inputError').hide();
+                }
+              }
+              else {
+                $('#resValue').addClass('invalid');
+                $('#inputError').html("Must have 2 or less non-zero digits adjacent to each other");
+                $('#inputError').show();
+              }
+            }
+          }
+        }
+      }
+      
+    </script>
+    
+    <div id="valContainer">
+      <input type="text" id="resValue" />
+      <select name="unit" id="unit">
+        <option value="-3">m&Omega;</option>
+        <option value="0" selected>&Omega;</option>
+        <option value="3">K&Omega;</option>
+        <option value="6">M&Omega;</option>
+      </select>
+      <input type="text" id="tolerance" />
+      <br />
+      <p id="inputError"></p>
+    </div>
+    <div id="footer">
+	  <p>Powered by <a href="http://jquery.com/">jQuery</a> 1.8.3 and <a href="http://www.kineticjs.com/">KineticJS</a> 4.4.3</p>
+	</div>
+  </body>
+</html>

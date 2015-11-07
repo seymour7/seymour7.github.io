@@ -1,29 +1,98 @@
-# Permalinks
-#
-# Use of `relative_permalinks` ensures post links from the index work properly.
-permalink:           pretty
+# Where things are
+source:       .               # the directory where Jekyll will read files
+destination:  ./_site         # the directory where Jekyll will write files
+plugins_dir:  ./_plugins
+layouts_dir:  ./_layouts
+data_dir:     ./_data
+includes_dir: ./_includes
+collections:  null
+
+# Handling Reading
+safe:         false                                           # Disable custom plugins, and ignore symbolic links
+include:      [".htaccess"]
+exclude:      ["Gemfile", "Gemfile.lock", "build_site.sh"]
+keep_files:   [".git", ".svn"]
+encoding:     "utf-8"
+markdown_ext: "markdown,mkdown,mkdn,mkd,md"
+
+# Filtering Content
+show_drafts: null
+limit_posts: 0        # Limit the number of posts to parse and publish
+future:      false    # Publish posts with a future date
+unpublished: false
+
+# Plugins
+whitelist: []
+gems:      []
+
+# Conversion
+markdown:    kramdown
+highlighter: pygments #rouge
+lsi:         false          # Produce an index for related posts
+excerpt_separator: "\n\n"
+incremental: false          # Only re-builds posts and pages that have changed (experimental)
+
+# Serving
+detach:  false       # Detach the server from the terminal
+port:    4000
+host:    127.0.0.1
+baseurl: ""          # Serve the website from the given base URL (does not include hostname)
+
+# Outputting
+permalink:     pretty
+paginate_path: /page:num
+timezone:      null
+
+quiet:    false
+defaults: []
+
+# Markdown Processors
+rdiscount:
+  extensions: []
+
+redcarpet:
+  extensions: []
+
+kramdown:
+  auto_ids:       true
+  footnote_nr:    1
+  entity_output:  as_char
+  toc_levels:     1..6
+  smart_quotes:   lsquo,rsquo,ldquo,rdquo
+  enable_coderay: false
+
+  coderay:
+    coderay_wrap:              div
+    coderay_line_numbers:      inline
+    coderay_line_number_start: 1
+    coderay_tab_width:         4
+    coderay_bold_every:        10
+    coderay_css:               style
+
+# Pagination
+paginate: 3                 # How many items should be displayed per page
+paginate_path: "/page:num/"
+
+# Sass
+sass:
+  sass_dir: _sass
+  style:    :compressed
+
+
+
+
+
+
+
+
+
+
 
 # Setup
-title:               Poole
-tagline:             The Jekyll Butler
-url:                 http://getpoole.com
-paginate:            1
-baseurl:             ""
-
-# Assets
-#
-# We specify the directory for Jekyll so we can use @imports.
-sass:
-  sass_dir:          _sass
-  style:            :compressed
+title:    seymour.co.za
+url:      http://seymour.co.za
 
 # About/contact
 author:
-  name:              Mark Otto
-  url:               https://twitter.com/mdo
-  email:             markdotto@gmail.com
-
-# Custom vars
-version:             2.0.0
-github:
-  repo:              https://github.com/poole/poole
+  name:  Michael Seymour
+  url:   http://seymour.co.za

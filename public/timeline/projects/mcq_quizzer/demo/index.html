@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>The Ultimate MEC2026 Test</title>
+    <style>
+    body {padding:0;margin:0;font-family:Arial, Helvetica, sans-serif;}
+    .container {width:500px;margin:100px auto;}
+    #question {font-size:18px;width:400px;}
+    #answers li {display:block;background-color:#eee;padding:10px;margin-bottom:4px;}
+    #answers li.hilite {background-color:#777;}
+    #answers li.correct {background-color:#00B200;}
+    #answers li.incorrect {background-color:#C00;}
+    #next {float:right;margin:0;padding:4px 8px;}
+    #comment {font-size:14px;text-align:center;font-style:italic;}
+    </style>
+    <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+    <script src="questions.js"></script>
+    <script>
+    var currentQuestion = null;
+    var questionIndex = 0;
+    var mcqLabel = ['a', 'b', 'c', 'd', 'e'];
+    
+    function shuffle(o) {
+        for(var j, x, i = o.length; i; j = Math.floor(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
+        return o;
+    };
+
+    questionOrder = [];
+    for (i=0; i<questions.length; i++)
+        questionOrder.push(i);
+    questionOrder = shuffle(questionOrder);
+    
+    // Show a random question
+    function nextQuestion() {
+        if (questionIndex < questionOrder.length)
+        {
+            // Grab next question
+            var random = questions[questionOrder[questionIndex]];
+            questionIndex++;
+    
+            $('#question').text(random.question);
+    
+            $('#next,#answers li,#comment').hide();
+            $('#answers li').removeClass("incorrect").removeClass("correct");
+    
+            for (var i = 0; i < random.options.length; i++) {
+                $('#'+mcqLabel[i]).html(random.options[i]).show();
+            }
+    
+            currentQuestion = random;
+        }
+        else
+        {
+            // End quiz
+            $("#next").replaceWith("<p style='float:right;'>Quiz finished</p>");
+        }
+    };
+
+    $( document ).ready(function() {
+    
+        // Check if answer is right
+        $('#answers li').click(function() {
+            var val = $(this).attr('id');
+            if(currentQuestion) {
+                if(currentQuestion.answer == val) {
+                    $(this).addClass("correct");
+                    $('#next').show();
+                    if (currentQuestion.comment)
+                        $('#comment').html(currentQuestion.comment).show();
+                } else {
+                    $(this).addClass("incorrect");
+                }
+            }
+        });
+        
+        $("#answers li").hover(function(){
+                if ( ! ($(this).hasClass("correct") || $(this).hasClass("incorrect")))
+                    $(this).addClass("hilite");
+            },function(){
+                $(this).removeClass("hilite");
+        });
+        
+        $('#next').click(function() {
+            nextQuestion();
+        });
+        
+        // Get questionaire started
+        nextQuestion();
+    });
+    </script>
+</head>
+<body>
+
+<div class="container">
+    <button id="next">Next</button>
+    <p id="question">XXX</p>
+    <ul id="answers">
+        <li id="a">A</li>
+        <li id="b">B</li>
+        <li id="c">C</li>
+        <li id="d">D</li>
+        <li id="e">E</li>
+    </ul>
+    <p id="comment">XXX</p>
+</div>
+
+</body>
+</html>

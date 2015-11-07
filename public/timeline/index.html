@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>Michael Seymour &ndash; Timeline</title>
+  <link rel="stylesheet" type="text/css" href="css/reset.css"> <!-- CSS reset -->
+  <link rel="stylesheet" type="text/css" href="css/style.css"> <!-- Resource style -->
+  <link href="lightbox/css/lightbox.css" rel="stylesheet" />
+  <script src="lightbox/js/jquery-1.11.0.min.js"></script>
+  <script src="lightbox/js/lightbox.min.js"></script>
+</head>
+
+<body>
+
+<header>
+  <h2>Michael Seymour &ndash; Timeline</h2>
+  <p>Some of my major projects that contributed significantly to my dev skills.</p>
+</header>
+
+<div id='content-wrap'>
+<ul id='timeline'>
+  <li class='work'>
+    <input class='radio' id='work15' name='works' type='radio'>
+    <div class="relative">
+      <label for='work15'>UCT Project: Android App for Sign Language Recognition</label>
+      <span class='date'>Jun-Oct 2014<br /><span class='age'>Age 22</span></span>
+      <span class='circle'></span>
+    </div>
+    <div class='content'>
+      <div class='screenshots'>
+        <a href="projects/sasl_translator/sasl_translator_1.png" data-lightbox="sasl_translator"><img src="projects/sasl_translator/sasl_translator_1_t.png" width="280px" /></a>
+      </div>
+      <p>
+        This project explored the design and implementation of a mobile application for South African Sign Language recognition. The application connects, via Bluetooth, to an instrumented glove in development by the University of Cape Town. The objective is to recognise the manual alphabet and manual numeric digits that have static gestures (31 signs in total). This project was split into two primary tasks: designing the classification model and designing the mobile application. Two neural networks (one with a log-sigmoid, and one with a symmetric Elliott activation function) and a Support Vector Machine (SVM) were compared. The SVM was chosen for implementation primarily because of its high accuracy of 99% and its superior robustness. However, multiple problems were encountered when attempting to automatically detect isolated gestures in a continuous stream of data. The mobile application was developed for Android and allowed the user to connect to a Bluetooth glove, display and dictate the classification output and calibrate the connected glove. It was predominately successful in real-time classification of the gestures within the restrictions of the smartphone's resources. On a low-end smartphone, the classification time did not exceed 45ms, the memory usage did not exceed 15 MB, and the battery life during typical usage was approximately 11 hours.
+      </p>
+      <h3>Things I learnt:</h3>
+      <ul>
+        <li>Android app dev</li>
+        <li>Planning skills/UML</li>
+        <li>Machine learning</li>
+      </ul>
+      <p><a href="projects/sasl_translator/sasl_translator.zip">Source code</a></p>
+      <span style="display:block;clear:both"></span>
+    </div>
+  </li>
+  <li class='work'>
+    <input class='radio' id='work14' name='works' type='radio'>
+    <div class="relative">
+      <label for='work14'>JavaScript Multiple Choice Quizzer</label>
+      <span class='date'>May 2014<br /><span class='age'>Age 21</span></span>
+      <span class='circle'></span>
+    </div>
+    <div class='content'>
+      <div class='screenshots'>
+        <a href="projects/mcq_quizzer/mcq_quizzer_1.png" data-lightbox="mcq_quizzer"><img src="projects/mcq_quizzer/mcq_quizzer_1_t.png" width="340px" /></a>
+      </div>
+      <p>
+        This was just a weekend project used to make the preparation for an exam more fun.
+      </p>
+      <a href="projects/mcq_quizzer/demo/">Demo</a> | <a href="projects/mcq_quizzer/mcq_quizzer.zip">Source</a>
+      <span style="display:block;clear:both"></span>
+    </div>
+  </li>
+  <li class='work'>
+    <input class='radio' id='work13' name='works' type='radio'>
+    <div class="relative">
+      <label for='work13'>Convos.co.za</label>
+      <span class='date'>Jan-Jul 2013<br /><span class='age'>Age 20</span></span>
+      <span class='circle'></span>
+    </div>
+    <div class='content'>
+      <div class='screenshots'>
+        <a href="projects/convos/convos_1.png" data-lightbox="convos" data-title="Home page"><img src="projects/convos/convos_1_t.png" width="340px" /></a><br />
+        <a href="projects/convos/convos_2.png" data-lightbox="convos" data-title="Chat page"><img src="projects/convos/convos_2_t.png" width="340px" /></a>
+      </div>
+      <p>
+        Convos pairs random UCT students, anonymously, in a chat window using UCT user/pass authentication. My most challenging project to date due to message synchronisation and the real-time requirements of the app. I developed it using PHP, MySQL and JavaScript (using JQuery). Required socket programming (for HTML5 websockets). On day 1 of release, 40 users logged in, but was blocked shortly thereafter by UCT for security reasons (I was using libcurl and the Vula login page to authenticate users).
+      </p>
+      <h3>Things I learnt:</h3>
+      <ul>
+        <li>Developing a real time application (requires a "heartbeat"/tick, etc.)</li>
+        <li>Chat synchronisation (handling sudden disconnects, erroneous states, etc.)</li>
+        <li>Websockets & Ajax</li>
+        <li>Using libcurl with PHP</li>
+        <li>New CSS3 attributes and HTML5 elements</li>
+      </ul>
+      <a href="projects/convos/convos.zip">Source</a>
+      <span style="display:block;clear:both"></span>
+    </div>
+  </li>
+  <li class='work'>
+    <input class='radio' id='work12' name='works' type='radio'>
+    <div class="relative">
+      <label for='work12'>Browser-based Multiplayer Games with Websockets</label>
+      <span class='date'>Jan-Feb 2012<br /><span class='age'>Age 19</span></span>
+      <span class='circle'></span>
+    </div>
+    <div class='content'>
+      <p>
+        I made 2 multiplayer games using the canvas tag and websockets: pong and go (a Chinese board game). I was really excited with the possibilities that websockets could provide, that ajax could not. Despite chrome only properly supporting websockets, I went about with the development. Nowadays, all browsers support websockets. I never released either of these games to the public as I didn't finish them well enough (due to university work and lack of momentum).
+      </p>
+      <h3>Things I learnt:</h3>
+      <ul>
+        <li>Websocket server implementations</li>
+        <li>Realtime capabilities of websockets</li>
+        <li>Multiplayer synchronisation</li>
+      </ul>
+      <a href="projects/html5_games/pong.zip">Pong source</a> | <a href="projects/html5_games/go.zip">Go source</a>
+    </div>
+  </li>
+  <li class='work'>
+    <input class='radio' id='work11' name='works' type='radio'>
+    <div class="relative">
+      <label for='work11'>HTML5 Canvas Resistor Colour Code Calculator</label>
+      <span class='date'>Jun 2011<br /><span class='age'>Age 19</span></span>
+      <span class='circle'></span>
+    </div>
+    <div class='content'>
+      <div class='screenshots'>
+        <a href="projects/resistor/resistor_1.png" data-lightbox="resistor"><img src="projects/resistor/resistor_1_t.png" width="340px" /></a><br />
+        <a href="projects/resistor/resistor_2.png" data-lightbox="resistor"><img src="projects/resistor/resistor_2_t.png" width="340px" /></a>
+      </div>
+      <p>
+        I looked into a more practical approach for the canvas tag by making a resistor colour code calculator. I used 2 Javascript libraries, <a href="http://kineticjs.com/">KineticJS</a> and <a href="http://jquery.com/">jQuery</a>. KineticJS was used to hand click events on the canvas tag.
+      </p>
+      <h3>Things I learnt:</h3>
+      <ul>
+        <li>Experience with JS libraries</li>
+        <li>Click event listening on canvas tags</li>
+      </ul>
+      <a href="../resistor/">Demo</a>
+      <span style="display:block;clear:both"></span>
+    </div>
+  </li>
+  <li class='work'>
+    <input class='radio' id='work10' name='works' type='radio'>
+    <div class="relative">
+      <label for='work10'>HTML5 Canvas Worms</label>
+      <span class='date'>Mar 2010<br /><span class='age'>Age 17</span></span>
+      <span class='circle'></span>
+    </div>
+    <div class='content'>
+      <p>
+        With increasing support by browsers for HTML5 and CSS3, 2 features caught my attention: websockets and the canvas tag. I decided to explore the canvas tag by making a small replica of the old 2D platform game, Worms. I didn't get very far, but managed to get a good idea of how the canvas tag works.
+      </p>
+      <div class='screenshots'>
+        <a href="projects/worms/worms_1.png" data-lightbox="worms"><img src="projects/worms/worms_1_t.png" width="340px" /></a>
+      </div>
+      <h3>Things I learnt:</h3>
+      <ul>
+        <li>HTML5 canvas tag</li>
+        <li>Better object orientation practices</li>
+        <li>Lots of native JavaScript syntax</li>
+      </ul>
+      <a href="projects/worms/demo/">Demo</a> | <a href="projects/worms/worms.zip">Source</a>
+      <span style="display:block;clear:both"></span>
+    </div>
+  </li>
+  <!--<li class='work'>
+    <input class='radio' id='work9' name='works' type='radio'>
+    <div class="relative">
+      <label for='work9'>Bustem' - Crowd-based Criminal Investigation</label>
+      <span class='date'>Jan-Mar 2010<br /><span class='age'>Age 17</span></span>
+      <span class='circle'></span>
+    </div>
+    <div class='content'>
+      <p>Allows users to submit crimes. Generates crime stats, reports crimes to police, etc. Allow users to submit videos of traffic violations and earn a percentage of the fine.</p>
+    </div>
+  </li>-->
+  <!--<li class='work'>
+    <input class='radio' id='work9' name='works' type='radio'>
+    <div class="relative">
+      <label for='work9'>UUNet Search</label>
+      <span class='date'>???<br /><span class='age'>Age ??</span></span>
+      <span class='circle'></span>
+    </div>
+    <div class='content'>
+      <p>Tracked cached content on the local UUNet ftp server.</p>
+    </div>
+  </li>-->
+  <!--<li class='work'>
+    <input class='radio' id='work8' name='works' type='radio'>
+    <div class="relative">
+      <label for='work8'>BaboViolent/Teeworlds Gaming Server IRC Bot</label>
+      <span class='date'>Jun 2009<br /><span class='age'>Age 17</span></span>
+      <span class='circle'></span>
+    </div>
+    <div class='content'>
+      <div class='screenshots'>
+        <a href="projects/irc/python_irc_bot.png" data-lightbox="irc_bot"><img src="projects/irc/python_irc_bot.png" width="340px" /></a>
+      </div>
+      <p>
+        I made an IRC Bot using Python 2.6 for the purpose of retrieving information from a local gaming server, for the game <em>BaboViolent 2</em>, and displaying it in an IRC channel. It was originally called 'sarah' and that is why you see the name popping up in the source code a few times. The biggest feature of the bot is retrieving in-game chat by using sockets to retrieve the raw data from the game server and regex to separate the chat from the other data. You can view the source here: http://pastebin.com/Tv7BvKUr. On the right is a screenshot of the bot in action.
+      </p>
+      <h3>Things I learnt:</h3>
+      <ul>
+        <li>Socket programming</li>
+        <li>Python</li>
+      </ul>
+      <p>
+        Here's another IRC Bot I made in PHP, quite a while before the Python bot and thus it is a lot simpler. I had fun making it though as it was the first time I interacted with another protocol (IRC) in a script. Afterwards, I realized Python would be much better to use for an IRC bot. Source can be viewed at http://pastebin.com/9CN13mWH
+      </p>
+      <span style="display:block;clear:both"></span>
+    </div>
+  </li>-->
+  <li class='work'>
+    <input class='radio' id='work7' name='works' type='radio'>
+    <div class="relative">
+      <label for='work7'>Capped.co.za</label>
+      <span class='date'>Jan-Apr 2009<br /><span class='age'>Age 16</span></span>
+      <span class='circle'></span>
+    </div>
+    <div class='content'>
+      <div class='screenshots'>
+        <a href="projects/capped/capped_1.png" data-lightbox="capped" data-title="Home page"><img src="projects/capped/capped_1_t.png" width="340px" /></a><br />
+        <a href="projects/capped/capped_2.png" data-lightbox="capped" data-title="Upload success"><img src="projects/capped/capped_2_t.png" width="340px" /></a>
+      </div>
+      <p>
+        Capped.co.za (name chosen because I already owned the domain from a prior project) was an image host (similar to <a href="http://imgur.com/">imgur</a>) that did not require a database. I built it using an MVC, PHP framework, <em>CodeIgniter</em>. It was implemented without the use of a database (for web hosting reasons), and hence, relied heavily on its file structure and names. The site made use of ImageMagick for image manipulation and had about 400 image uploads before I took it down.
+      </p>
+      <h3>Things I learnt:</h3>
+      <ul>
+        <li>Handling file uploads</li>
+        <li>Using php extensions (imagemagick)</li>
+        <li>Cron jobs (web host didn't support, unfortunately)</li>
+        <li>Paid hosting</li>
+        <li>PHP configuration (for file upload sizes, etc.)</li>
+      </ul>
+      <a href="projects/capped/capped.zip">Source code</a>
+      <span style="display:block;clear:both"></span>
+    </div>
+  </li>
+  <li class='work'>
+    <input class='radio' id='work5' name='works' type='radio'>
+    <div class="relative">
+      <label for='work5'>Oracle ThinkQuest Competition</label>
+      <span class='date'>Jul-Aug 2008<br /><span class='age'>Age 16</span></span>
+      <span class='circle'></span>
+    </div>
+    <div class='content'>
+      <div class='screenshots'>
+        <a href="projects/thinkquest/thinkquest_1.png" data-lightbox="thinkquest"><img src="projects/thinkquest/thinkquest_1_t.png" width="340px" /></a>
+      </div>
+      <p>
+        For this competition, I worked with 3 other team members to create a static website on HIV and AIDS. We developed the website using HTML, CSS, JavaScript and Adobe Flash. I also made contributions to the site's informational content. We achieved 1st place in South Africa for the 15-and-under division, and were placed in the top 5% of contestants internationally.
+      </p>
+      <h3>Things I learnt:</h3>
+      <ul>
+        <li>A bit of flash</li>
+        <li>The value of a dynamic vs. a static website</li>
+        <li>UX/web design (more advanced html, css & js)</li>
+        <li>Photoshop/Illustrator</li>
+        <li>Designing for cross-browser compatibility</li>
+      </ul>
+      <a href="http://wayback.archive-it.org/3635/20130913003750/http://library.thinkquest.org/07aug/01207/">Archived website</a>
+      <span style="display:block;clear:both"></span>
+    </div>
+  </li>
+  <li class='work'>
+    <input class='radio' id='work6' name='works' type='radio'>
+    <div class="relative">
+      <label for='work6'>User Submitted Afrikaans Dictionary</label>
+      <span class='date'>Mar-Jun 2008<br /><span class='age'>Age 15/16</span></span>
+      <span class='circle'></span>
+    </div>
+    <div class='content'>
+      <div class='screenshots'>
+        <a href="projects/afrikaans_dictionary/afr_dict.png" data-lightbox="afr_dict"><img src="projects/afrikaans_dictionary/afr_dict_t.png" width="340px" /></a>
+      </div>
+      <p>
+        In 2008 I decided to make an Afrikaans dictionary so that I could instantly translate Afrikaans words into English and vice versa. However, after looking at the size of my school dictionary, I realized it would take me years to manually add each word. My next idea was to make the website community based and allow users to submit words with their translations and also allow the people that use the dictionary to remove spam/wrong words by voting the translations up or down. I made the site using PHP, XHTML, CSS, Javascript (for asynchronous rating of words/spam reporting) and MySQL for the database of all the words. I tried to keep the site as simple as possible. You can search for translations on the homepage, add translations on the translate page and browse words from a-z on the browse page. I never released the site because of hosting costs.
+      </p>
+      <h3>Things I learnt:</h3>
+      <ul>
+        <li>Ajax (first with XMLHttpRequest, then jQuery)</li>
+        <li>Basic search</li>
+        <li>Database design</li>
+        <li>XSS prevention</li>
+        <li>URL rewrites with Apache</li>
+        <li>PHP frameworks (CodeIgniter, an MVC framework)</li>
+        <li>Better organisation of a website's file and directory structure</li>
+      </ul>
+      <a href="projects/afrikaans_dictionary/afrikaans_dictionary.zip">Source code</a>
+      <span style="display:block;clear:both"></span>
+    </div>
+  </li>
+  <li class='work'>
+    <input class='radio' id='work4' name='works' type='radio'>
+    <div class="relative">
+      <label for='work4'>Hacking phase</label>
+      <span class='date'>May-Dec 2007<br /><span class='age'>Age 14</span></span>
+      <span class='circle'></span>
+    </div>
+    <div class='content'>
+      <p>
+        At this point I got involved with windows and network security exploits and subsequently did not do much software development.
+      </p>
+    </div>
+  </li>
+  <li class='work'>
+    <input class='radio' id='work3' name='works' type='radio'>
+    <div class="relative">
+      <label for='work3'>Eskomplain.co.za</label>
+      <span class='date'>Jan-Dec 2007<br /><span class='age'>Age 13/14</span></span>
+      <span class='circle'></span>
+    </div>
+    <div class='content'>
+      <div class='screenshots'>
+        <a href="projects/eskomplain/adsense.png" data-lightbox="eskomplain" data-title="My first adsense cheque."><img src="projects/eskomplain/adsense_t.png" width="340px" /></a>
+        <p style="font-size:60%">My first Adsense cheque.</p>
+      </div>
+      <p>
+        Eskomplain contained news, jokes and a complaints board for Eskom, as well as load shedding schedules and user contributed power saving tips. The website was a Wordpress installation with plugins developed by me using PHP, MySQL and JavaScript. The website ran for a period of 1 year during Eskom's load shedding. I earned about $250 from Google Adsense and averaged about 100 unique visitors per month.
+      </p>
+      <h3>Things I learnt:</h3>
+      <ul>
+        <li>PHP, SQL, JavaScript</li>
+        <li>Spam protection/form security</li>
+        <li>How SEO works</li>
+        <li>How Google Adsense works</li>
+        <li>Paid domain registration</li>
+        <li>Local development with a WAMP stack</li>
+      </ul>
+      <span style="display:block;clear:both"></span>
+    </div>
+  </li>
+  <li class='work'>
+    <input class='radio' id='work2' name='works' type='radio'>
+    <div class="relative">
+      <label for='work2'>Schoolsucks.za.net</label>
+      <span class='date'>2006<br /><span class='age'>Age 12/13</span></span>
+      <span class='circle'></span>
+    </div>
+    <div class='content'>
+      <p>
+        After hearing a few stories of people earning money from advertising on their websites, I began learning some webdev. The first site I actually made was rabidweasel.za.net which hosted wallpapers that I made in Photoshop. The second was schoolsucks.za.net that hosted old homework (book reviews, Afrikaans essays, etc.) that people could download and copy. I eventually took it down after about half a year because I thought it was unethical.
+      </p>
+      <p>
+        The website was static and hosted on a free web host.
+      </p>
+      <h3>Things I learnt:</h3>
+      <ul>
+        <li>Configuring DNS records</li>
+        <li>Basics of HTML & CSS</li>
+        <li>Basics of Apache (i.e. the file called "index" is loaded by default)</li>
+      </ul>
+    </div>
+  </li>
+  <li class='work'>
+    <input class='radio' id='work1' name='works' type='radio' checked>
+    <div class="relative">
+      <label for='work1'>CubeVoid</label>
+      <span class='date'>2005<br /><span class='age'>Age 11/12</span></span>
+      <span class='circle'></span>
+    </div>
+    <div class='content'>
+      <div class='screenshots'>
+        <a href="projects/cubevoid/cubevoid_1.png" data-lightbox="cubevoid"><img src="projects/cubevoid/cubevoid_1_t.png" width="340px" /></a>
+      </div>
+      <p>
+        Up until this point in my life, almost all my time on a computer was spent playing games. I can't quite recall what my motivation was, but in 2005 I began doing more constructive things (which felt like quite a natural transition). Me and my friend, Tim, began game development using a drag-and-drop application, GameMaker 5. To get more advanced control of the game's design, however, you'd need to make use of the Game Maker Language (GML), a scripting language with similar syntax to c++. This is when I first started learning to code, which was a slow process where I'd read examples and use trial-and-error. I still remember the day Tim and I learnt what a "variable" was - it was quite eye-opening (and remember, this was before we even did algebra in high school).
+      </p>
+      <p>
+        We developed many games, but one in particular got the most attention: CubeVoid. It's similar to the game, Copter, but with added features like powerups, boss levels, variations in physical properties, etc. We'd bring new versions of the game to school and play it with our friends during lunch.
+      </p>
+      <span style="display:block;clear:both"></span>
+    </div>
+  </li>
+</ul>
+</div>
+
+
+</body>
+</html>
