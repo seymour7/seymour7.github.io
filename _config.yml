@@ -23,7 +23,7 @@ unpublished: false
 
 # Plugins
 whitelist: []
-gems:      []
+gems:      ["jekyll-paginate"]
 
 # Conversion
 markdown:    kramdown
@@ -61,13 +61,13 @@ kramdown:
   smart_quotes:   lsquo,rsquo,ldquo,rdquo
   enable_coderay: false
 
-  coderay:
-    coderay_wrap:              div
-    coderay_line_numbers:      inline
-    coderay_line_number_start: 1
-    coderay_tab_width:         4
-    coderay_bold_every:        10
-    coderay_css:               style
+  syntax_highlighter_opts:
+    wrap:              div
+    line_numbers:      inline
+    line_number_start: 1
+    tab_width:         4
+    bold_every:        10
+    css:               style
 
 # Pagination
 paginate: 3                 # How many items should be displayed per page
