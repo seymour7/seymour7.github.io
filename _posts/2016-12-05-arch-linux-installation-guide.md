@@ -29,9 +29,10 @@ You'll be automatically logged in on a console, as root
 ![]({{ site.baseurl }}/public/arch_install/0020.png)
 
 Make sure your internet connection is working:
-{% highlight bash %}
+
+```bash
 ping -c 4 google.com
-{% endhighlight %}
+```
 
 ![]({{ site.baseurl }}/public/arch_install/0030.png)
 

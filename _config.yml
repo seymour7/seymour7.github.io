@@ -27,7 +27,7 @@ gems:      ["jekyll-paginate"]
 
 # Conversion
 markdown:    kramdown
-highlighter: pygments #rouge
+highlighter: rouge
 lsi:         false          # Produce an index for related posts
 excerpt_separator: "\n\n"
 incremental: false          # Only re-builds posts and pages that have changed (experimental)
@@ -61,13 +61,13 @@ kramdown:
   smart_quotes:   lsquo,rsquo,ldquo,rdquo
   enable_coderay: false
 
-  syntax_highlighter_opts:
-    wrap:              div
-    line_numbers:      inline
-    line_number_start: 1
-    tab_width:         4
-    bold_every:        10
-    css:               style
+  # syntax_highlighter_opts:
+  #   wrap:              div
+  #   line_numbers:      inline
+  #   line_number_start: 1
+  #   tab_width:         4
+  #   bold_every:        10
+  #   css:               style
 
 # Pagination
 paginate: 3                 # How many items should be displayed per page
