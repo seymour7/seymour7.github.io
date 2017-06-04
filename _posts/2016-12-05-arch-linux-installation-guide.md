@@ -4,7 +4,7 @@ title: The Friendliest Arch Linux Installation Guide on the Interwebs
 description: A simple guide to install Arch Linux with KDE
 ---
 
-I've had a few friends that wanted to try out Arch Linux but have given up after the grueling installation process. In this post I demonstrate how I usually perform a fresh Arch Linux installation.
+I've had a few friends that wanted to try out Arch Linux but have given up after the grueling installation process. In this post I demonstrate, with screenshots, how I usually perform a fresh Arch Linux installation.
 
 This guide (like most Arch installation guides) is really just a simplified version of what's on the wiki [here](https://wiki.archlinux.org/index.php/installation_guide), so consider referring to it as well.
 
@@ -12,7 +12,7 @@ This guide (like most Arch installation guides) is really just a simplified vers
 
 [Download](https://www.archlinux.org/download/) an Arch Linux ISO (I'm using `archlinux-2016.12.01-dual.iso` for this tutorial).
 
-I then use `dd` to make a bootable USB drive. You can view guides on how to do this in various OS's [here](https://wiki.archlinux.org/index.php/USB_flash_installation_media).
+I then use `dd` to make a bootable USB drive. You can view a guide on how to do this in your OS [here](https://wiki.archlinux.org/index.php/USB_flash_installation_media).
 
 ## Pre-installation
 
