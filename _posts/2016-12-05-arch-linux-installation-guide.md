@@ -46,6 +46,8 @@ wifi-menu -o
 
 Follow the prompts.
 
+That should have established a connection (test with `ping google.com`). If not, follow the steps below.
+
 List your profiles using
 
 {% highlight bash %}
