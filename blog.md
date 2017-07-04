@@ -4,7 +4,7 @@ title: Blog
 ---
 
 <section>
-  <table>
+  <table class="table">
     {% for post in site.posts %}
       <tr>
         <td><i class="icon-clock"></i> <time datetime="{{post.date|date:"%F"}}">{{post.date|date:"%d %b %Y"}}</time></td>  
