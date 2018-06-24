@@ -70,7 +70,7 @@ kramdown:
   #   css:               style
 
 # Pagination
-paginate: 3                 # How many items should be displayed per page
+paginate: 5                 # How many items should be displayed per page
 paginate_path: "/page:num/"
 
 # Sass
