@@ -69,7 +69,7 @@ Further reading:
 
 ### Open-closed principle
 
-* Classes/modules should be open for extension but closed for modification
+* Classes/modules should be open for extension but closed for modification.
 * Rather extend functionality by adding new code instead of changing existing code.
 * The goal is to get to a point where you can never break the core of your system.
 
@@ -141,13 +141,12 @@ class WirePayment implements Payment {
 Now we can add new payment methods by adding new classes, instead of modifying existing classes.
 
 Further reading:
-* https://blog.ndepend.com/solid-design-the-open-close-principle-ocp/
+* https://blog.ndepend.com/solid-design-the-open-close-principle-ocp
 
 ### Liskov substitution principle
 
-If a class implements an interface, it must be able to substitute any reference that implements that same interface.
-
-E.g. if a class called `MySQL` implements `Database`, and another class called `MongoDB` implements `Database`, you should be able to substitute `MySQL` objects for `MongoDB` objects
+* If a class implements an interface, it must be able to substitute any reference that implements that same interface.
+* e.g. if a class called `MySQL` implements `Database`, and another class called `MongoDB` implements `Database`, you should be able to substitute `MySQL` objects for `MongoDB` objects.
 
 Here's an example that violates this principle:
 
@@ -193,11 +192,11 @@ Here is another, more real-world encounter of this principle:
 * You have a class called `BankAccount` with a `withdrawal()` method. Do all bank accounts allow withdrawals? A fixed deposit account won't allow withdrawals, for example.
 
 Further reading:
-* https://blog.ndepend.com/solid-design-the-liskov-substitution-principle/
+* https://blog.ndepend.com/solid-design-the-liskov-substitution-principle
 
 ### Interface segregation principle
 
-No client should be forced to depend on methods it does not use.
+* No client should be forced to depend on methods it does not use.
 
 Here's an example that violates this principle:
 
@@ -256,7 +255,7 @@ public class JohnDoe implements SwimmingAthlete {
 Now, `JohnDoe` does not have to implement actions that he is not capable of performing.
 
 Further reading: 
-* https://blog.ndepend.com/solid-design-the-interface-segregation-principle-isp/
+* https://blog.ndepend.com/solid-design-the-interface-segregation-principle-isp
 * https://dzone.com/articles/solid-principles-interface-segregation-principle
 
 ### Dependency inversion principle
@@ -324,12 +323,12 @@ public class Project {
 Now, the `Project` class does not depend on lower level modules, but rather abstractions.
 
 Further reading:
-* https://blog.ndepend.com/solid-design-the-dependency-inversion-principle-dip/
+* https://blog.ndepend.com/solid-design-the-dependency-inversion-principle-dip
 * https://dzone.com/articles/solid-principles-dependency-inversion-principle
 
 ### Final note: Don't be too strict about SOLID
 
-* SOLID design principles are principles, not rules
+* SOLID design principles are principles, not rules.
 * Always use common sense when applying SOLID (know your trade-offs).
 * Usually with SOLID, it requires more time writing code, so you can spend less time reading it later.
 * Finally, remember to use SOLID as a tool, not as a goal.
