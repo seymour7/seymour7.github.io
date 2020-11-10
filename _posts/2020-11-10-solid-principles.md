@@ -65,7 +65,7 @@ Some other examples where you'd need separate classes are: user input validation
 Be careful not to over-fragment code (creating too many responsibilities). Remember the whole point of SOLID is to make your code easier to maintain.
 
 Further reading:
-* https://blog.ndepend.com/solid-design-the-single-responsibility-principle-srp
+* [NDepend](https://blog.ndepend.com/solid-design-the-single-responsibility-principle-srp)
 
 ### Open-closed principle
 
@@ -141,7 +141,7 @@ class WirePayment implements Payment {
 Now we can add new payment methods by adding new classes, instead of modifying existing classes.
 
 Further reading:
-* https://blog.ndepend.com/solid-design-the-open-close-principle-ocp
+* [NDepend](https://blog.ndepend.com/solid-design-the-open-close-principle-ocp)
 
 ### Liskov substitution principle
 
@@ -192,7 +192,7 @@ Here is another, more real-world encounter of this principle:
 * You have a class called `BankAccount` with a `withdrawal()` method. Do all bank accounts allow withdrawals? A fixed deposit account won't allow withdrawals, for example.
 
 Further reading:
-* https://blog.ndepend.com/solid-design-the-liskov-substitution-principle
+* [NDepend](https://blog.ndepend.com/solid-design-the-liskov-substitution-principle)
 
 ### Interface segregation principle
 
@@ -255,8 +255,8 @@ public class JohnDoe implements SwimmingAthlete {
 Now, `JohnDoe` does not have to implement actions that he is not capable of performing.
 
 Further reading: 
-* https://blog.ndepend.com/solid-design-the-interface-segregation-principle-isp
-* https://dzone.com/articles/solid-principles-interface-segregation-principle
+* [NDepend](https://blog.ndepend.com/solid-design-the-interface-segregation-principle-isp)
+* [DZone](https://dzone.com/articles/solid-principles-interface-segregation-principle)
 
 ### Dependency inversion principle
 
@@ -323,8 +323,8 @@ public class Project {
 Now, the `Project` class does not depend on lower level modules, but rather abstractions.
 
 Further reading:
-* https://blog.ndepend.com/solid-design-the-dependency-inversion-principle-dip
-* https://dzone.com/articles/solid-principles-dependency-inversion-principle
+* [NDepend](https://blog.ndepend.com/solid-design-the-dependency-inversion-principle-dip)
+* [DZone](https://dzone.com/articles/solid-principles-dependency-inversion-principle)
 
 ### Final note: Don't be too strict with SOLID principles
 
