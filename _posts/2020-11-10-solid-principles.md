@@ -326,7 +326,7 @@ Further reading:
 * https://blog.ndepend.com/solid-design-the-dependency-inversion-principle-dip
 * https://dzone.com/articles/solid-principles-dependency-inversion-principle
 
-### Final note: Don't be too strict about SOLID
+### Final note: Don't be too strict with SOLID principles
 
 * SOLID design principles are principles, not rules.
 * Always use common sense when applying SOLID (know your trade-offs).
