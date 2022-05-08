@@ -40,7 +40,7 @@ To view the parent of a commit, use `git show --pretty=raw <commit-hash>`.
 
 When a branch named `feature` is merged with `master`, a new “merge commit” is created on the branch `master`. A merge commit is the same as a normal commit except that it has 2 parents. In this case, the 2 parents of the merge commit will be the previous head of `master` and the head of `feature`.
 
-PIC
+![]({{ site.baseurl }}/public/revert_git_merge/1.png)
 
 On running `git show`, the new commit displays both the parents:
 
@@ -88,7 +88,8 @@ Merge branch 'my-branch'
 
 In this situation, `git revert ae2058cf5ca -m 1` will get you the tree as it was in `bf75d61d8f1`, and `git revert -m 2` will reinstate the tree as it was in `12d62bfa0e0`.
 
-PIC
+![]({{ site.baseurl }}/public/revert_git_merge/2.png)
+![]({{ site.baseurl }}/public/revert_git_merge/3.png)
 
 To better understand the parent commits, you can run:<br>
 `git log bf75d61d8f1` or `git log 12d62bfa0e0`
@@ -99,7 +100,7 @@ To better understand the parent commits, you can run:<br>
 
 ### References
 
-* https://www.git-tower.com/learn/git/faq/undo-git-merge
-* https://stackoverflow.com/q/7099833
-* https://levelup.gitconnected.com/reverting-a-merge-commit-7de2e9114c7d
-* https://git-school.github.io/visualizing-git/#free
+* [https://www.git-tower.com/learn/git/faq/undo-git-merge]
+* [https://stackoverflow.com/q/7099833]
+* [https://levelup.gitconnected.com/reverting-a-merge-commit-7de2e9114c7d]
+* [https://git-school.github.io/visualizing-git/#free]
