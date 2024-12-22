@@ -177,15 +177,15 @@ Thanks to Lukáš Sieber for suggesting the following:
 
 > I had to make a small adjustment because in some cases the script evaluated the input IP address incorrectly.
 > 
-> Example:
-> IPv6 prefix: 2a13:50c0:50::/56
+> Example:<br>
+> IPv6 prefix: 2a13:50c0:50::/56<br>
 > IPv6 address: 2a13:50c0:50::1
 > 
-> In bit form it is like this:
-> 0010101000010011010100001100000000000000001010000 (IPv6 prefix)
-> 00101010000100110101000011000000000000000000010100000000000000 (IPv6 address)
+> In bit form it is like this:<br>
+> 0010101000010011010100001100000000000000001010000 (IPv6 prefix)<br>
+> 00101010000100110101000011000000000000000000010100000000000000 (IPv6 address)<br>
 > Here you can see that the prefix has been translated into less than 56 characters in bit form.
 > 
-> The modification consisted of adding 0 from the right to the length of 56 characters (for both the address and the prefix):
-> $ip_net_bits = str_pad(substr($ip_bits, 0, $netmask_len), $netmask_len, '0', STR_PAD_RIGHT);
+> The modification consisted of adding 0 from the right to the length of 56 characters (for both the address and the prefix):<br>
+> $ip_net_bits = str_pad(substr($ip_bits, 0, $netmask_len), $netmask_len, '0', STR_PAD_RIGHT);<br>
 > $range_net_bits = str_pad(substr($range_bits, 0, $netmask_len), $netmask_len, '0', STR_PAD_RIGHT);
